@@ -1,0 +1,44 @@
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties.hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
+
+  datasource:
+    url: jdbc:mysql://47.94.146.88:3306/onlinestore?characterEncoding=UTF-8&useSSL=false
+    username: onlinestore
+    password: onlinestore123456
+    tomcat:
+      test-while-idle: true
+      max-active: 3
+      initial-size: 1
+      min-idle: 3
+      max-idle: 3
+
+  redis:
+    host: 47.94.146.88
+    password: 123456654321
+    port: 6379
+    pool.maxIdle: 8
+    pool.minIdle: 1
+    database: 6
+  messages.basename: messages
+  jackson:
+    default-property-inclusion: always
+
+multipart:
+  maxFileSize: 10Mb
+  maxRequestSize: 10Mb
+
+wechat:
+  #测试号
+  appId: wx3df6dff6054cca32
+  appSecret: 5ff928448d86840583e741f09d56dc12
+  redirectUrl: http://wx.joryun.com/api/customer/wechat/authorize
+  payNotifyUrl: http://wx.joryun.com/api/customer/order/pay/buyGoodsNotify
+
+
+server.error.whitelabel.enabled: false
