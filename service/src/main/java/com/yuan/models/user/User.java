@@ -1,11 +1,11 @@
 package com.yuan.models.user;
 
 import com.yuan.models.FlagType;
+import com.yuan.models.SexType;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -14,8 +14,10 @@ import java.util.Date;
 @Entity
 @Table(name = "tb_user")
 public class User {
+
     @Id
     @GeneratedValue
+    @ApiModelProperty("用户id")
     private Integer userId;
 
     @ApiModelProperty("用户昵称")
@@ -31,16 +33,7 @@ public class User {
     private String headImage;
 
     @ApiModelProperty("用户性别")
-    @Column(length = 4)
-    private Integer sex;
-
-    @ApiModelProperty("用户创建日期")
-    @NotNull
-    private Date createTime;
-
-    @ApiModelProperty("最近登录时间")
-    @NotNull
-    private Date updateTime;
+    private SexType sex;
 
     @ApiModelProperty("微信OpenId")
     @Column(length = 256)
@@ -54,24 +47,22 @@ public class User {
     @Column(length = 16)
     private String birthday;
 
+    @ApiModelProperty("邮箱")
+    private String email;
+
     @ApiModelProperty("用户余额")
     private Integer balance;
 
     @ApiModelProperty("冻结金额")
     private Integer freezeBalance;
 
-    //产品经理属性
-    @ApiModelProperty("分成余额")
-    private Integer dividend;
+    @ApiModelProperty("用户创建日期")
+    @NotNull
+    private Date createTime;
 
-    @ApiModelProperty("分成比例")
-    private BigDecimal balanceProportion;
-
-    @ApiModelProperty("小区id")
-    private Integer districtId;
-
-    @ApiModelProperty("角色，Ordinary：普通用户，District：产品经理")
-    private UserType role;
+    @ApiModelProperty("最近登录时间")
+    @NotNull
+    private Date updateTime;
 
     @ApiModelProperty("用户是否删除")
     private FlagType flag;
@@ -92,6 +83,14 @@ public class User {
         this.nickname = nickname;
     }
 
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
     public String getHeadImage() {
         return headImage;
     }
@@ -100,28 +99,12 @@ public class User {
         this.headImage = headImage;
     }
 
-    public Integer getSex() {
+    public SexType getSex() {
         return sex;
     }
 
-    public void setSex(Integer sex) {
+    public void setSex(SexType sex) {
         this.sex = sex;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
     }
 
     public String getOpenId() {
@@ -148,12 +131,12 @@ public class User {
         this.birthday = birthday;
     }
 
-    public FlagType getFlag() {
-        return flag;
+    public String getEmail() {
+        return email;
     }
 
-    public void setFlag(FlagType flag) {
-        this.flag = flag;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Integer getBalance() {
@@ -172,66 +155,27 @@ public class User {
         this.freezeBalance = freezeBalance;
     }
 
-    public String getRealName() {
-        return realName;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setRealName(String realName) {
-        this.realName = realName;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
-    public Integer getDividend() {
-        return dividend;
+    public Date getUpdateTime() {
+        return updateTime;
     }
 
-    public void setDividend(Integer dividend) {
-        this.dividend = dividend;
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 
-    public Integer getDistrictId() {
-        return districtId;
+    public FlagType getFlag() {
+        return flag;
     }
 
-    public void setDistrictId(Integer districtId) {
-        this.districtId = districtId;
-    }
-
-    public UserType getRole() {
-        return role;
-    }
-
-    public void setRole(UserType role) {
-        this.role = role;
-    }
-
-    public BigDecimal getBalanceProportion() {
-        return balanceProportion;
-    }
-
-    public void setBalanceProportion(BigDecimal balanceProportion) {
-        this.balanceProportion = balanceProportion;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", nickname='" + nickname + '\'' +
-                ", realName='" + realName + '\'' +
-                ", headImage='" + headImage + '\'' +
-                ", sex=" + sex +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
-                ", openId='" + openId + '\'' +
-                ", phone='" + phone + '\'' +
-                ", birthday='" + birthday + '\'' +
-                ", balance=" + balance +
-                ", freezeBalance=" + freezeBalance +
-                ", dividend=" + dividend +
-                ", balanceProportion=" + balanceProportion +
-                ", districtId=" + districtId +
-                ", role=" + role +
-                ", flag=" + flag +
-                '}';
+    public void setFlag(FlagType flag) {
+        this.flag = flag;
     }
 }

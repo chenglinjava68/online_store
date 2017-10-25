@@ -3,9 +3,9 @@ package com.yuan.service.user;
 import com.yuan.common.exception.MessageCodes;
 import com.yuan.common.utils.StringUtils;
 import com.yuan.models.FlagType;
+import com.yuan.models.SexType;
 import com.yuan.models.user.User;
 import com.yuan.models.user.UserDao;
-import com.yuan.models.user.UserType;
 import com.yuan.service.RedisKeyPrefix;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,8 +50,7 @@ public class UserService {
         User user = saveUser(userInfoMap);
         final Integer userId = user.getUserId();
         deleteRedisCache(userId);
-        final String token = addRedisCache(userId);
-        return token;
+        return addRedisCache(userId);
     }
 
     /**
@@ -73,15 +72,13 @@ public class UserService {
             user.setOpenId(openId);
             user.setUpdateTime(new Date());
             userDao.save(user);
-
         } else {
             user = new User();
-            user.setSex(sex);
+            user.setSex(SexType.values()[sex]);
             user.setOpenId(openId);
             user.setNickname(nickName);
             user.setHeadImage(headImgUrl);
             user.setFlag(FlagType.FALSE);
-            user.setRole(UserType.Ordinary);
             user.setCreateTime(new Date());
             user.setUpdateTime(new Date());
             userDao.save(user);
@@ -104,7 +101,6 @@ public class UserService {
             return null;
         }
     }
-
 
     private String addRedisCache(Integer userId) {
         String token = generateToken();
