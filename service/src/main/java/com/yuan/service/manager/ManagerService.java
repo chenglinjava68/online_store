@@ -2,6 +2,7 @@ package com.yuan.service.manager;
 
 import com.yuan.common.exception.MessageCodes;
 import com.yuan.common.exception.ValidationException;
+import com.yuan.common.utils.BeanUtils;
 import com.yuan.common.utils.Md5Encrypt;
 import com.yuan.common.utils.StringUtils;
 import com.yuan.models.FlagType;
@@ -18,6 +19,7 @@ import org.springframework.util.Assert;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -29,17 +31,23 @@ public class ManagerService {
 
     private Logger logger = LoggerFactory.getLogger(ManagerService.class);
 
+    @Resource
+    private ManagerDao managerDao;
+
     @Autowired
     private StringRedisTemplate redisTemplate;
 
     @Resource(name = "stringRedisTemplate")
     private ValueOperations<String, String> operations;
 
-    @Resource
-    private ManagerDao managerDao;
-
     /**
      * 管理员登录
+     *
+     * @param account
+     * @param password
+     * @param captcha
+     * @param rightCaptchaUUid
+     * @return
      */
     public ManagerLoginSuccessVO login(String account, String password, String captcha, String rightCaptchaUUid) {
         //从redis中获得该验证码
@@ -81,6 +89,8 @@ public class ManagerService {
 
     /**
      * 清空redis缓存中的验证码
+     *
+     * @param uuid
      */
     private void deleteCaptchaRedisCache(String uuid) {
         final String captcha = operations.get(RedisKeyPrefix.pictureCaptcha(uuid));
@@ -91,6 +101,8 @@ public class ManagerService {
 
     /**
      * 清空redis缓存中的管理员数据
+     *
+     * @param managerId
      */
     private void deleteManagerRedisCache(Integer managerId) {
         final String token = operations.get(RedisKeyPrefix.buildManagerIdToToken(managerId));
@@ -102,11 +114,31 @@ public class ManagerService {
 
     /**
      * 生成token
+     *
+     * @return
      */
     private String generateToken() {
         final String uuid = UUID.randomUUID().toString();
         return org.springframework.util.StringUtils.deleteAny(uuid, "-") + Long.toString(System.currentTimeMillis(),
                 Character.MAX_RADIX);
+    }
+
+    /**
+     * 添加管理员
+     *
+     * @param managerAddVO
+     * @return
+     */
+    public ManagerVO addManager(ManagerAddVO managerAddVO) {
+        //TODO 店铺管理员需设置店铺
+
+        Manager manager = new Manager();
+        BeanUtils.copyNonNullProperties(managerAddVO, manager);
+        manager.setPassword(Md5Encrypt.md5(managerAddVO.getAccount() + managerAddVO.getPassword()));
+        manager.setCreateTime(new Date());
+        manager.setFlag(FlagType.FALSE);
+        managerDao.save(manager);
+        return toManagerVO(manager);
     }
 
     /**
@@ -117,8 +149,22 @@ public class ManagerService {
      */
     public Manager getManager(Integer managerId) {
         Manager manager = managerDao.findByManagerIdAndFlag(managerId, FlagType.FALSE);
-        Assert.notNull(manager, MessageCodes.MANAGER_IS_NOT_EXIT);
+        Assert.notNull(manager, MessageCodes.MANAGER_IS_NOT_EXIST);
         return manager;
+    }
+
+    /**
+     * manager -> managerVO
+     *
+     * @param manager
+     * @return
+     */
+    private ManagerVO toManagerVO(Manager manager) {
+        //TODO 考虑返回字段新增店铺id与店铺名字，当店铺id不为空时，才存在店铺名字
+
+        ManagerVO managerVO = new ManagerVO();
+        BeanUtils.copyNonNullProperties(manager, managerVO);
+        return managerVO;
     }
 
 }

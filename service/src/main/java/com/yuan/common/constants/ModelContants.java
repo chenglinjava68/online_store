@@ -29,9 +29,9 @@ public class ModelContants {
 
     //管理员
     public interface ManagerContant {
-        String ADMIN_MANAGER = "admin";     //超级管理员
-        String SIMPLE_MANAGER = "simple";    //普通管理员(运营人员)
-        String SHOP_MANAGER = "shop"; //店铺管理员
+        String ADMIN_MANAGER = "ADMIN";     //超级管理员
+        String SIMPLE_MANAGER = "SIMPLE";    //普通管理员(运营人员)
+        String SHOP_MANAGER = "SHOP"; //店铺管理员
     }
 
 }

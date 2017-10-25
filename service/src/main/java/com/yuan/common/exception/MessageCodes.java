@@ -36,7 +36,7 @@ public class MessageCodes {
     public final static String MANAGER_IS_EXIT = "manager.is.exit";//管理员已存在
     public final static String MOBILEPHONE_HAS_BEEN_REGISTE = "mobilephone.is.registed";//手机号已被注册
     public final static String STR_MOBILEPHONE_HAS_BEEN_REGISTE = "手机号码已被注册";
-    public final static String MANAGER_IS_NOT_EXIT = "manager.is.not.exit";//管理员不存在
+    public final static String MANAGER_IS_NOT_EXIST = "manager.is.not.exit";//管理员不存在
     public final static String MANAGER_IS_NOT_DELETE = "manager_is_not_delete";//该账户为超级管理员，不可删除
 
 }
