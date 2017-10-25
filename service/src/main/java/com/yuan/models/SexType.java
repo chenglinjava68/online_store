@@ -1,22 +1,10 @@
 package com.yuan.models;
 
 /**
+ * 性别，NOT：未知, MAN：男，WOMAN：女
+ *
  * @author joryun ON 2017/10/22.
  */
 public enum SexType {
-    not(0), man(1), woman(2);
-
-    private int value;
-
-    SexType(int i) {
-        this.value = i;
-    }
-
-    public int getValue() {
-        return value;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
+    NOT, MAN, WOMAN
 }

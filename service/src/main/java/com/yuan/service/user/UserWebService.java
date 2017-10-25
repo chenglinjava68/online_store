@@ -3,7 +3,6 @@ package com.yuan.service.user;
 import com.yuan.common.constants.ModelContants;
 import com.yuan.common.exception.MessageCodes;
 import com.yuan.common.exception.ValidationException;
-import com.yuan.common.utils.BeanUtils;
 import com.yuan.common.utils.StringUtils;
 import com.yuan.models.FlagType;
 import com.yuan.models.user.User;
@@ -25,19 +24,6 @@ public class UserWebService {
 
     @Resource
     private UserDao userDao;
-
-    /**
-     * 去到个人中心
-     *
-     * @param userId
-     * @return
-     */
-    public UserVO toUserCenter(Integer userId) {
-        User user = userDao.findOne(userId);
-        UserVO userVO = new UserVO();
-        BeanUtils.copyNonNullProperties(user, userVO);
-        return userVO;
-    }
 
     /**
      * 检查是否已绑定手机

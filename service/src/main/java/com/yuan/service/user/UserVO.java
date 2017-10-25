@@ -42,7 +42,6 @@ public class UserVO {
     @ApiModelProperty("用户手机号码")
     private String phone;
 
-    //产品经理属性
     @ApiModelProperty("分成余额")
     private Integer dividend;
 

@@ -1,6 +1,7 @@
 package com.yuan.models.manager;
 
 import com.yuan.models.FlagType;
+import com.yuan.models.SexType;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -21,13 +22,11 @@ public class Manager {
     private Integer managerId;
 
     @ApiModelProperty("管理员名字")
-    @Column(length = 32)
     @NotBlank
     private String managerName;
 
     @ApiModelProperty("性别")
-    @Column(length = 11)
-    private Integer sex;
+    private SexType sex;
 
     @ApiModelProperty("账号")
     @Column(length = 32)
@@ -48,7 +47,6 @@ public class Manager {
     private Date createTime;
 
     @ApiModelProperty("管理员角色，admin：超级管理员, simple：平台管理员, shop：店铺管理员")
-    @Column(length = 4)
     @NotNull
     private RoleType managerRole;
 
@@ -72,12 +70,12 @@ public class Manager {
         this.managerName = managerName;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public SexType getSex() {
+        return sex;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setSex(SexType sex) {
+        this.sex = sex;
     }
 
     public String getAccount() {
@@ -96,20 +94,20 @@ public class Manager {
         this.password = password;
     }
 
-    public FlagType getFlag() {
-        return flag;
-    }
-
-    public void setFlag(FlagType flag) {
-        this.flag = flag;
-    }
-
     public String getPhone() {
         return phone;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public RoleType getManagerRole() {
@@ -120,12 +118,12 @@ public class Manager {
         this.managerRole = managerRole;
     }
 
-    public Integer getSex() {
-        return sex;
+    public FlagType getFlag() {
+        return flag;
     }
 
-    public void setSex(Integer sex) {
-        this.sex = sex;
+    public void setFlag(FlagType flag) {
+        this.flag = flag;
     }
 
     @Override

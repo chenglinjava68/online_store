@@ -1,5 +1,6 @@
 package com.yuan.service.manager;
 
+import com.yuan.models.SexType;
 import com.yuan.models.manager.RoleType;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -21,7 +22,7 @@ public class ManagerAddVO {
     private String account;
 
     @ApiModelProperty("性别")
-    private Integer sex;
+    private SexType sex;
 
     @ApiModelProperty("手机号")
     private String phone;
@@ -58,11 +59,11 @@ public class ManagerAddVO {
         this.account = account;
     }
 
-    public Integer getSex() {
+    public SexType getSex() {
         return sex;
     }
 
-    public void setSex(Integer sex) {
+    public void setSex(SexType sex) {
         this.sex = sex;
     }
 
