@@ -7,8 +7,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.List;
-
 /**
  * @author joryun ON 2017/10/22.
  */
@@ -38,8 +36,6 @@ public interface UserDao extends JpaRepository<User, Integer>, JpaSpecificationE
             ":balanceFee where u.userId = :userId")
     int setBalanceAndFreezeBalanceByUserIdMethodWechat(@Param("userId") Integer userId, @Param("balanceFee") Integer
             balanceFee);
-
-    List<User> findByRoleAndDistrictIdAndFlag(UserType role, Integer districtId, FlagType flag);
 
     User findByPhone(String phone);
 
