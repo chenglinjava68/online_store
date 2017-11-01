@@ -12,7 +12,7 @@
 * 本地环境：Mac OS，JDK1.8
 * 开发平台：IntelliJ IDEA 2017.2
 * 图片存储：OSS or Qiniu
-* CI：Jenkins
+* CI：Docker + Jenkins
 * 容器：Docker
 
 ## 功能模块（粗略版）
