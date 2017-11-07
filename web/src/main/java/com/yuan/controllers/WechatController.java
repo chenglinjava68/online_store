@@ -42,21 +42,24 @@ public class WechatController {
     @GetMapping("authorize")
     @ApiOperation("微信授权回调接口,成功返回跳转到一个页面，并携带用户标示token，失败抛出异常")
     public String authorize(
-            @RequestParam(value = "code",required = false) String code,
-            @RequestParam(value = "state",required = false) String state){
-        logger.info("-------------------------code：{}------------------------------",code);
-        logger.info("-------------------------state: {}----------------------------",state);
-        if(StringUtils.isEmpty(code)){
-                throw new ValidationException(MessageCodes.WECHAT_AUTHORIZE_FAILE);
-        }else{
-            Map<String,Object> authorizeMap = wechatUtils.authorize(code);
-            logger.info("-------------------------authorizeMap: {}----------------------------",authorizeMap.toString());
-            Map<String,Object> userInfoMap = wechatUtils.getUserInfo((String)authorizeMap.get("access_token"),(String)authorizeMap.get("openid"));
-            logger.info("-------------------------userInfo: {}----------------------------",userInfoMap.toString());
+            @RequestParam(value = "code", required = false) String code,
+            @RequestParam(value = "state", required = false) String state) {
+        logger.info("-------------------------code：{}------------------------------", code);
+        logger.info("-------------------------state: {}----------------------------", state);
+        if (StringUtils.isEmpty(code)) {
+            throw new ValidationException(MessageCodes.WECHAT_AUTHORIZE_FAILE);
+        } else {
+            Map<String, Object> authorizeMap = wechatUtils.authorize(code);
+            logger.info("-------------------------authorizeMap: {}----------------------------", authorizeMap
+                    .toString());
+            Map<String, Object> userInfoMap = wechatUtils.getUserInfo((String) authorizeMap.get("access_token"),
+                    (String) authorizeMap
+                    .get("openid"));
+            logger.info("-------------------------userInfo: {}----------------------------", userInfoMap.toString());
             String token = userService.login(userInfoMap);
-            logger.info("------------------------user token is ：{}",token);
-            logger.info("------------------------redirect url is：{}",state+"?token="+token);
-            return "redirect:"+state+"?token="+token;
+            logger.info("------------------------user token is ：{}", token);
+            logger.info("------------------------redirect url is：{}", state + "?token=" + token);
+            return "redirect:" + state + "?token=" + token;
         }
     }
 
@@ -64,11 +67,11 @@ public class WechatController {
     @ApiOperation("获得js-sdk授权凭据")
     @ResponseBody
     public Map<String, String> getSign(
-            @RequestParam(value="url",required=false,defaultValue="-1") String url){
+            @RequestParam(value = "url", required = false, defaultValue = "-1") String url) {
         wechatUtils.getToken();
         logger.info("------------------------token:{}----------------", WechatConstant.TOKEN);
-        logger.info("------------------------ticket:{}---------",WechatConstant.TICKET);
-        logger.info("------------------------url:{}----------------",url);
+        logger.info("------------------------ticket:{}---------", WechatConstant.TICKET);
+        logger.info("------------------------url:{}----------------", url);
         Map<String, String> map = wechatUtils.sign(url);
         map.put("appId", appId);
         return map;
