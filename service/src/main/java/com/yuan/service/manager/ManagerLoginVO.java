@@ -1,10 +1,12 @@
 package com.yuan.service.manager;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 /**
  * @author joryun ON 2017/10/22.
  */
+@Data
 public class ManagerLoginVO {
 
     @ApiModelProperty("账号")
@@ -19,38 +21,4 @@ public class ManagerLoginVO {
     @ApiModelProperty("验证码的uuid")
     private String uuid;
 
-    public ManagerLoginVO() {
-    }
-
-    public String getAccount() {
-        return account;
-    }
-
-    public void setAccount(String account) {
-        this.account = account;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getCaptcha() {
-        return captcha;
-    }
-
-    public void setCaptcha(String captcha) {
-        this.captcha = captcha;
-    }
-
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
 }

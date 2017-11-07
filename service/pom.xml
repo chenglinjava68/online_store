@@ -105,11 +105,10 @@
             <version>1.1</version>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>com.luwei.module</groupId>-->
-            <!--<artifactId>ali-sms</artifactId>-->
-            <!--<version>0.0.8</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
 
     </dependencies>
 

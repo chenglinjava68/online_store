@@ -3,6 +3,7 @@ package com.yuan.models.manager;
 import com.yuan.models.FlagType;
 import com.yuan.models.SexType;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -14,6 +15,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "tb_manager")
+@Data
 public class Manager {
 
     @Id
@@ -54,90 +56,4 @@ public class Manager {
     @NotNull
     private FlagType flag;
 
-    public Integer getManagerId() {
-        return managerId;
-    }
-
-    public void setManagerId(Integer managerId) {
-        this.managerId = managerId;
-    }
-
-    public String getManagerName() {
-        return managerName;
-    }
-
-    public void setManagerName(String managerName) {
-        this.managerName = managerName;
-    }
-
-    public SexType getSex() {
-        return sex;
-    }
-
-    public void setSex(SexType sex) {
-        this.sex = sex;
-    }
-
-    public String getAccount() {
-        return account;
-    }
-
-    public void setAccount(String account) {
-        this.account = account;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public RoleType getManagerRole() {
-        return managerRole;
-    }
-
-    public void setManagerRole(RoleType managerRole) {
-        this.managerRole = managerRole;
-    }
-
-    public FlagType getFlag() {
-        return flag;
-    }
-
-    public void setFlag(FlagType flag) {
-        this.flag = flag;
-    }
-
-    @Override
-    public String toString() {
-        return "Manager{" +
-                "managerId=" + managerId +
-                ", managerName='" + managerName + '\'' +
-                ", sex=" + sex +
-                ", account='" + account + '\'' +
-                ", password='" + password + '\'' +
-                ", phone='" + phone + '\'' +
-                ", createTime=" + createTime +
-                ", managerRole=" + managerRole +
-                ", flag=" + flag +
-                '}';
-    }
 }

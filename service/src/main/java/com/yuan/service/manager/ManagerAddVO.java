@@ -3,10 +3,12 @@ package com.yuan.service.manager;
 import com.yuan.models.SexType;
 import com.yuan.models.manager.RoleType;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 /**
  * @author joryun ON 2017/10/22.
  */
+@Data
 public class ManagerAddVO {
 
     @ApiModelProperty("姓名")
@@ -26,53 +28,5 @@ public class ManagerAddVO {
 
     @ApiModelProperty("手机号")
     private String phone;
-
-    public String getManagerName() {
-        return managerName;
-    }
-
-    public void setManagerName(String managerName) {
-        this.managerName = managerName;
-    }
-
-    public RoleType getManagerRole() {
-        return managerRole;
-    }
-
-    public void setManagerRole(RoleType managerRole) {
-        this.managerRole = managerRole;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getAccount() {
-        return account;
-    }
-
-    public void setAccount(String account) {
-        this.account = account;
-    }
-
-    public SexType getSex() {
-        return sex;
-    }
-
-    public void setSex(SexType sex) {
-        this.sex = sex;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 
 }

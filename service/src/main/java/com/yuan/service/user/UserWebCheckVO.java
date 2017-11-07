@@ -2,11 +2,13 @@ package com.yuan.service.user;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 /**
  * @author joryun ON 2017/10/22.
  */
 @ApiModel("用户是否已绑定手机VO")
+@Data
 public class UserWebCheckVO {
 
     @ApiModelProperty("是否已绑定手机。0：未绑定，1：已绑定")
@@ -24,19 +26,4 @@ public class UserWebCheckVO {
         this.phone = phone;
     }
 
-    public Integer getHasBind() {
-        return hasBind;
-    }
-
-    public void setHasBind(Integer hasBind) {
-        this.hasBind = hasBind;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 }
